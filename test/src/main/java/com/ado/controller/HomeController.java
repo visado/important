@@ -16,14 +16,13 @@ public class HomeController {
 	@RequestMapping("/index")
 	public String index(){
 		
-		//homeService.save();
 		Home home = new Home();
 		home.setId(3);
 		home.setInfo("nico");
 		home.setName("brain");
-		home.setPic("c.jpg");
-		
+		home.setPic("c.jpg");	
 		homeService.save(home);
+		
 		return "index";
 	}
 }

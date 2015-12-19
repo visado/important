@@ -1,22 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans  
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
         http://www.springframework.org/schema/beans/spring-beans.xsd 
         http://www.springframework.org/schema/util 
         http://www.springframework.org/schema/util/spring-util-4.0.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd
         "
-        xmlns:util="http://www.springframework.org/schema/util"
-        xmlns:p="http://www.springframework.org/schema/p"
-        xmlns:context="http://www.springframework.org/schema/context"    
-        >
-    <context:component-scan base-package="com.ado.service">
-        <context:exclude-filter type="annotation" 
-            expression="org.springframework.stereotype.Controller"/>
-        <context:exclude-filter type="annotation" 
-            expression="org.springframework.web.bind.annotation.ControllerAdvice"/>        
-    </context:component-scan>
-    
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context">
+
+	<!-- 注解支持 -->
+	<context:annotation-config />
+
+	<context:component-scan base-package="com.ado">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+	</context:component-scan>
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:prefix="/WEB-INF/jsp/" p:suffix=".jsp" />
+
+	<!-- 实体管理器工厂,spring整合jpa的入口 -->
+	<bean id="emf"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="jpa" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://localhost/ado?useUnicode=true&amp;characterEncoding=UTF-8" />
+		<property name="username" value="root" />
+		<property name="password" value="admin" />
+	</bean>
+
+	<!--实体管理器工厂,spring整合jpa的入口,不能自定义数据源 jpa:是持久化单元的名称 -->
+	<bean id="lemfb"
+		class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="jpa"></property>
+	</bean>
+
+	<!-- 配置事务管理器 JpaTransactionManager -->
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="lemfb"></property>
+	</bean>
+
 </beans>

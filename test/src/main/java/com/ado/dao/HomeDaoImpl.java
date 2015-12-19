@@ -7,11 +7,11 @@ import org.springframework.stereotype.Repository;
 import com.ado.model.Home;
 
 @Repository("homeDao")
-public class HomeDaoImpl {
+public class HomeDaoImpl implements HomeDao{
 
+	@PersistenceContext(unitName="lemfb")
 	private EntityManager entityManager;
 	
-	@PersistenceContext(unitName="jpa")
 	public void setEntityManager(EntityManager em){
 		this.entityManager = em;
 	}
