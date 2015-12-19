@@ -3,6 +3,7 @@ package com.ado.dao;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ado.model.Home;
 
@@ -16,6 +17,7 @@ public class HomeDaoImpl implements HomeDao{
 		this.entityManager = em;
 	}
 	
+	@Transactional
 	public void save(Home home){
 		entityManager.persist(home);
 	}

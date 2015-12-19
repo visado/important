@@ -30,6 +30,7 @@
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="persistenceUnitName" value="jpa" />
 		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="com.ado.model"/>
 	</bean>
 
 	<bean id="dataSource"
