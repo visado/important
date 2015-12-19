@@ -10,7 +10,7 @@ import com.ado.model.Home;
 @Repository("homeDao")
 public class HomeDaoImpl implements HomeDao{
 
-	@PersistenceContext(unitName="lemfb")
+	@PersistenceContext(unitName="jpa")
 	private EntityManager entityManager;
 	
 	public void setEntityManager(EntityManager em){
