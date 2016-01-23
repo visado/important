@@ -23,6 +23,7 @@ public class HomeController {
 		home.setPic("c.jpg");	
 		homeService.save(home);
 		
+		//add commnit 
 		return "index";
 	}
 }
