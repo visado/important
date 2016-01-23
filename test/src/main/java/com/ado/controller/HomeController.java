@@ -17,7 +17,7 @@ public class HomeController {
 	public String index(){
 		
 		Home home = new Home();
-		home.setId(3);
+		home.setId(6);
 		home.setInfo("nico");
 		home.setName("brain");
 		home.setPic("c.jpg");	
